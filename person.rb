@@ -12,7 +12,6 @@ class Person < Nameable
     @age = age
     @parent_permission = parent_permission
   end
-  super(@v)
 
   private
 
