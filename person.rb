@@ -12,7 +12,8 @@ class Person < Nameable
     @age = age
     @parent_permission = parent_permission
   end
-    super(@v )
+  super(@v)
+
   private
 
   def of_age?
@@ -23,8 +24,7 @@ class Person < Nameable
     of_age? || @parent_permission
   end
 
-  def correct_name 
+  def correct_name
     @name
   end
 end
-
