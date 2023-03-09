@@ -1,9 +1,7 @@
 require_relative 'nameable'
 
-
 class Person < Nameable
   attr_reader :id
-
   attr_accessor :name, :age
 
   def initialize(age, name: 'Unknown', parent_permission: true)
@@ -13,7 +11,6 @@ class Person < Nameable
     @age = age
     @parent_permission = parent_permission
   end
-
   private
 
   def of_age?
