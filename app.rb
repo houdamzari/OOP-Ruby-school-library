@@ -1,26 +1,26 @@
-require './person'
-require './student'
-require './teacher'
 require './book'
 require './rental'
 require './classroom'
+require_relative 'student'
+require_relative 'teacher'
+require_relative 'person'
 
 class App
   attr_accessor :people_list, :book_list, :rental_list
 
   def initialize
-    @people_list_list = []
-    @book_list_list = []
-    @rental_list_list = []
+    @people_list = []
+    @book_list = []
+    @rental_list = []
   end
 
   def list_books
-    if @book_lists.empty?
+    if @book_list.empty?
       puts 'There are no books yet'
       return
     end
 
-    @book_lists.each do |book|
+    @book_list.each do |book|
       puts "Title: #{book.title}, Author: #{book.author}"
     end
   end
@@ -84,19 +84,19 @@ class App
     author = gets.chomp
 
     book = Book.new(title, author)
-    @book_lists << book
+    @book_list << book
 
     puts 'Book created successfully'
   end
 
   def create_rental
-    if @book_lists.empty?
+    if @book_list.empty?
       puts 'No book record found'
     elsif @people_list.empty?
       puts 'No person record found'
     else
       puts 'Select a book from the following list by number '
-      @book_lists.each_with_index do |book, index|
+      @book_list.each_with_index do |book, index|
         puts "#{index}) Title: #{book.title}, Author: #{book.author}"
       end
 
@@ -112,7 +112,7 @@ class App
       print 'Date: '
       date = gets.chomp
 
-      @rental_lists << Rental.new(date, @book_lists[book_index], @people_list[person_index])
+      @rental_list << Rental.new(date, @book_list[book_index], @people_list[person_index])
       puts 'Rental created successfully '
     end
   end
@@ -121,7 +121,7 @@ class App
     print 'ID of person : '
     id = gets.chomp.to_i
 
-    rentals = @rental_lists.filter { |rental| rental.person.id == id }
+    rentals = @rental_list.filter { |rental| rental.person.id == id }
 
     puts 'Rentals :'
     rentals.each do |rental|
