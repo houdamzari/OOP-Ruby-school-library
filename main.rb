@@ -47,5 +47,5 @@ class Main
   end
 end
 
-main = main.new
+main = Main.new
 main.run
