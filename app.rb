@@ -6,13 +6,14 @@ require './rental'
 require './classroom'
 
 class App
-attr_accessor :people_list, :book_list, :rental_list
+  attr_accessor :people_list, :book_list, :rental_list
 
-def initialize
-@people_list_list = []
-@book_list_list = []
-@rental_list_list = []
-end
+  def initialize
+    @people_list_list = []
+    @book_list_list = []
+    @rental_list_list = []
+  end
+
   def list_books
     if @book_lists.empty?
       puts 'There are no books yet'

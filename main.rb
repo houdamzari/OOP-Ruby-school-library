@@ -1,5 +1,3 @@
-require './app'
-
 class Main
   def initialize
     @app = App.new
@@ -8,29 +6,22 @@ class Main
   def run
     puts 'Welcome to School Library App !'
     loop do
-      puts 'Please choose an option by entering a number :'
-      puts '1 - List all books'
-      puts '2 - List all people'
-      puts '3 - Create a person'
-      puts '4 - Create a book'
-      puts '5 - Create a rental'
-      puts '6 - List all rentals for a given person id'
-      puts '7 - Exit'
+      display_menu_options
       option = gets.chomp
 
       case option
       when '1'
-        @app.list_books
+        list_books
       when '2'
-        @app.list_people
+        list_people
       when '3'
-        @app.create_person
+        create_person
       when '4'
-        @app.create_book
+        create_book
       when '5'
-        @app.create_rental
+        create_rental
       when '6'
-        @app.list_rentals
+        list_rentals
       when '7'
         break
       else
@@ -38,14 +29,47 @@ class Main
       end
 
       puts ' '
-
       puts 'Press any key to continue'
       gets.chomp
     end
 
     puts 'Thank you for using this app!'
   end
-end
 
-main = Main.new
-main.run
+  private
+
+  def display_menu_options
+    puts 'Please choose an option by entering a number :'
+    puts '1 - List all books'
+    puts '2 - List all people'
+    puts '3 - Create a person'
+    puts '4 - Create a book'
+    puts '5 - Create a rental'
+    puts '6 - List all rentals for a given person id'
+    puts '7 - Exit'
+  end
+
+  def list_books
+    @app.list_books
+  end
+
+  def list_people
+    @app.list_people
+  end
+
+  def create_person
+    @app.create_person
+  end
+
+  def create_book
+    @app.create_book
+  end
+
+  def create_rental
+    @app.create_rental
+  end
+
+  def list_rentals
+    @app.list_rentals
+  end
+end
