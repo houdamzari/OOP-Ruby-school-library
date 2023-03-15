@@ -14,6 +14,10 @@ class App
     @rental_list = []
   end
 
+  def books
+    @book_list
+  end
+  
   def list_books
     if @book_list.empty?
       puts 'There are no books yet'
