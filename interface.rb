@@ -30,10 +30,6 @@ def checking_options(app)
     puts 'This option is invalid, please select a number from [1..7]' if input < '1' || input > '7'
     process_data(input, app)
   end
-
-
-  
-  
 end
 
 def person_option(option, app)
@@ -44,7 +40,7 @@ def person_option(option, app)
     app.handle_tr_input
   else
     puts 'This option is invalid, please select a number from [1..2]'
-    choice = gets.to_i
+    option = gets.to_i
     person_option(option, app)
   end
 end
