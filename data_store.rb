@@ -1,78 +1,50 @@
+require 'fileutils'
 require 'json'
 
-class DataStore
-  def initialize(app, book_list)
-    @app = app
-    @book_list = book_list
-    @people = []
-    @rentals = []
-  end
+  FileUtils.mkdir_p('data')
+  base = "#{Dir.pwd}/data"
+  File.open("#{base}/books_list.json", 'w') unless File.exist?("#{base}/books_list.json")
+  File.open("#{base}/people_list.json", 'w') unless File.exist?("#{base}/people_list.json")
+  File.open("#{base}/rentals_list.json", 'w') unless File.exist?("#{base}/rentals_list.json")
 
-  # Function to load books from a JSON file
-  def load_books
-    if File.exist?("books.json")
-      File.open("books.json", "r") do |f|
-        @book_list = JSON.load(f)
-      end
-    else
-      @book_list = []
-    end
-  end
-
-  # Function to load people from a JSON file
-  def load_people
-    if File.exist?("people.json")
-      File.open("people.json", "r") do |f|
-        @people = JSON.load(f)
-      end
-    else
-      @people = []
-    end
-  end
-
-  # Function to load rentals from a JSON file
-  def load_rentals
-    if File.exist?("rentals.json")
-      File.open("rentals.json", "r") do |f|
-        @rentals = JSON.load(f)
-      end
-    else
-      @rentals = []
-    end
-  end
-
-  # Code to load all data on startup
-  def load_all_data
-    load_books
-    load_people
-    load_rentals
-  end
-
-  # Function to save books to a JSON file
-  def save_books
-    File.open("books.json", "w") do |f|
-      JSON.dump(@book_list, f)
-    end
-  end
-
-  # Function to save people to a JSON file
-  def save_people
-    File.open("people.json", "w") do |f|
-      JSON.dump(@app.people_list, f)
-    end
-  end
-
-  # Function to save rentals to a JSON file
-  def save_rentals
-    File.open("rentals.json", "w") do |f|
-      JSON.dump(@app.rental_list, f)
-    end
-  end
-
-  # Code to save all data on exit
-  def save_all_data
-    save_books
-    save_people
-    save_rentals
+def save_data(filename, array)
+  case filename
+  when 'people_list'
+    save_people(array)
+  when 'rentals_list'
+    save_rentals(array)
+  when 'books_list'
+    save_books(array)
+  else
+    puts 'Error!'
   end
 end
+
+    def save_rentals(array)
+      base = "#{Dir.pwd}/data"
+      empty_array = []
+      array.each { |e| empty_array.push({ date: e.date, book: e.book.title, person: e.person.id }) }
+      File.write("#{base}/rentals_list.json", empty_array.to_json, mode: 'w')
+    end
+
+    def save_books(array)
+      base = "#{Dir.pwd}/data"
+      books_array = array.map { |e| { title: e.title, author: e.author } }
+      File.write("#{base}/books_list.json", books_array.to_json, mode: 'w')
+    end
+
+   def save_people(array)
+  base = "#{Dir.pwd}/data"
+  empty_array = []
+  array.each do |e|
+    empty_array.push({
+      person: e.class,
+      name: e.name,
+      specialization: (e.class.to_s == 'Teacher' ? e.specialization : nil),
+      id: e.id,
+      age: e.age
+    })
+  end
+  File.write("#{base}/people_list.json", empty_array.to_json, mode: 'w')
+end
+
