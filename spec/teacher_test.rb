@@ -1,62 +1,39 @@
+# Import required modules
 require_relative '../person'
-require_relative '../teacher'
-require 'rspec'
+require 'test/unit'
 
-RSpec.describe Teacher do
-  describe '#can_use_services?' do
-    context 'when the teacher\'s age is less than 21' do
-      let(:teacher) { Teacher.new(20, 'Mathematics') }
+# Define test case class
+class TestTeacher < Test::Unit::TestCase
+  # Test the initialization of the Teacher class
+  def test_initialization
+    teacher1 = Teacher.new(30, 'Mathematics', 'John Doe')
+    assert_equal(teacher1.age, 30)
+    assert_equal(teacher1.specialization, 'Mathematics')
+    assert_equal(teacher1.name, 'John Doe')
+    assert_equal(teacher1.parent_permission, true)
 
-      it 'returns false' do
-        expect(teacher.can_use_services?).to be false
-      end
-    end
-
-    context 'when the teacher\'s age is between 21 and 60' do
-      let(:teacher) { Teacher.new(30, 'Mathematics') }
-
-      it 'returns true' do
-        expect(teacher.can_use_services?).to be true
-      end
-    end
-
-    context 'when the teacher\'s age is greater than 60' do
-      let(:teacher) { Teacher.new(70, 'Mathematics') }
-
-      it 'returns false' do
-        expect(teacher.can_use_services?).to be false
-      end
-    end
+    teacher2 = Teacher.new(40, 'Science', parent_permission: false)
+    assert_equal(teacher2.age, 40)
+    assert_equal(teacher2.specialization, 'Science')
+    assert_equal(teacher2.name, 'Unknown')
+    assert_equal(teacher2.parent_permission, false)
   end
 
-  describe '#specialization' do
-    let(:teacher) { Teacher.new(30, 'Mathematics') }
+  # Test the can_use_services? method of the Teacher class
+  def test_can_use_services
+    teacher1 = Teacher.new(25, 'Art')
+    assert_false(teacher1.can_use_services?)
 
-    it 'returns the teacher\'s specialization' do
-      expect(teacher.specialization).to eq('Mathematics')
-    end
-
-    it 'can be changed' do
-      teacher.specialization = 'English'
-      expect(teacher.specialization).to eq('English')
-    end
+    teacher2 = Teacher.new(35, 'Chemistry')
+    assert_true(teacher2.can_use_services?)
   end
 
-  describe '#name' do
-    context 'when the teacher\'s name is not provided' do
-      let(:teacher) { Teacher.new(30, 'Mathematics') }
+  # Test the name method of the Teacher class
+  def test_name
+    teacher1 = Teacher.new(28, 'History')
+    assert_equal(teacher1.name, 'Unknown')
 
-      it 'has the default name Unknown' do
-        expect(teacher.name).to eq('Unknown')
-      end
-    end
-
-    context 'when the teacher\'s name is provided' do
-      let(:teacher) { Teacher.new(30, 'Mathematics') }
-
-      it 'returns the teacher\'s name' do
-        expect(teacher.name).to eq('John Smith')
-      end
-    end
+    teacher2 = Teacher.new(50, 'English', 'Alice')
+    assert_equal(teacher2.name, 'Alice')
   end
 end
