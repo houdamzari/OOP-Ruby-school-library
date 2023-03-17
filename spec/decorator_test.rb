@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative 'decorator'
+require_relative '../decorator'
 
 describe Decorator do
   let(:nameable) { double('nameable') }

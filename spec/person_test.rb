@@ -1,7 +1,7 @@
 require 'rspec'
-require_relative 'person'
-require_relative 'book'
-require_relative 'rental'
+require_relative '../person'
+require_relative '../book'
+require_relative '../rental'
 
 RSpec.describe Person do
   let(:book) { Book.new('The Great Gatsby', 'F. Scott Fitzgerald') }

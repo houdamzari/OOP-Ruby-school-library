@@ -1,7 +1,7 @@
 require 'rspec'
-require_relative 'person'
-require_relative 'classroom'
-require_relative 'student'
+require_relative '../person'
+require_relative '../classroom'
+require_relative '../student'
 
 RSpec.describe Student do
   describe '#add_classroom' do
