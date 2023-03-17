@@ -77,6 +77,4 @@ RSpec.describe Person do
       expect(rental).to be_an_instance_of(Rental)
     end
   end
-
-
 end
