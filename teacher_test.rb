@@ -5,7 +5,6 @@ require 'rspec'
 RSpec.describe Teacher do
   describe '#can_use_services?' do
     context 'when the teacher\'s age is less than 21' do
-      # let(:teacher) { Teacher.new(20, "Mathematics", "John Smith") }
       let(:teacher) { Teacher.new(20, 'Mathematics') }
 
       it 'returns false' do
@@ -14,7 +13,6 @@ RSpec.describe Teacher do
     end
 
     context 'when the teacher\'s age is between 21 and 60' do
-      # let(:teacher) { Teacher.new(30, "Mathematics", "John Smith") }
       let(:teacher) { Teacher.new(30, 'Mathematics') }
 
       it 'returns true' do
@@ -23,7 +21,6 @@ RSpec.describe Teacher do
     end
 
     context 'when the teacher\'s age is greater than 60' do
-      # let(:teacher) { Teacher.new(70, "Mathematics", "John Smith") }
       let(:teacher) { Teacher.new(70, 'Mathematics') }
 
       it 'returns false' do
