@@ -6,11 +6,11 @@ require_relative '../capitalized_decorator'
 class TestCapitalizedDecorator < Test::Unit::TestCase
   # Define the setup method
   def setup
-    @decorator = CapitalizedDecorator.new("john doe")
+    @decorator = CapitalizedDecorator.new('john doe')
   end
-  
+
   # Define the test case for the correct_name method
   def test_correct_name
-    assert_equal("John doe", @decorator.correct_name)
+    assert_equal('John doe', @decorator.correct_name)
   end
 end
